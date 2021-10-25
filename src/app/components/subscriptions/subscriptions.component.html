@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="closeModal()" defaultHref="/login">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Subscription</ion-title>
+  </ion-toolbar>
+
+
+
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-label>Select Exam</ion-label>
+  <div *ngIf="allSubscriptions.length > 0">
+    <ion-item *ngFor="let subs of allSubscriptions">
+      <ion-label>{{subs.examName}}</ion-label>
+      <ion-checkbox (ionChange)="getSubscription($event)" [value]="subs">
+      </ion-checkbox>
+    </ion-item>
+
+    <div class="ion-text-center" *ngIf="isLoading">
+      <ion-spinner>
+
+      </ion-spinner>
+    </div>
+
+    <ion-list *ngIf="subsResp && !isLoading">
+      <ion-item>
+        <ion-label>Total Subscription Cost</ion-label>
+        <ion-text> {{subsResp.annualFee}} </ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-label>Total Discount</ion-label>
+        <ion-text>{{subsResp.totalDiscountAmt}}</ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-label>Final Subscription Cost</ion-label>
+        <ion-text>{{subsResp.annualFee - subsResp.totalDiscountAmt}}</ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-label>CGST {{allSubscriptions[0].cgst}}%</ion-label>
+        <ion-text>{{(subsResp.cgst/100) * (subsResp.annualFee - subsResp.totalDiscountAmt)}}</ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-label>SGST {{allSubscriptions[0].sgst}}%</ion-label>
+        <ion-text>{{round((subsResp.sgst/100) * (subsResp.annualFee - subsResp.totalDiscountAmt))}}</ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          Final Subscription with GST
+        </ion-label>
+        <ion-text>{{(subsResp.annualFee - subsResp.totalDiscountAmt) + ((subsResp.cgst/100) *
+          (subsResp.annualFee - subsResp.totalDiscountAmt) + (subsResp.sgst/100) * (subsResp.annualFee -
+          subsResp.totalDiscountAmt))}}</ion-text>
+      </ion-item>
+
+
+      <div class="ion-text-center">
+        <ion-button>Proceed for Payment</ion-button>
+        <ion-button (click)="closeModal()">Cancel</ion-button>
+      </div>
+    </ion-list>
+  </div>
+</ion-content>

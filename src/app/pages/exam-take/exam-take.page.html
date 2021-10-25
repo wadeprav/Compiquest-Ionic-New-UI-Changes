@@ -1,0 +1,150 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-buttons slot="start">
+      <ion-back-button defaultHref="/exam-info"></ion-back-button>
+    </ion-buttons> -->
+    <ion-title *ngIf="quesData.length > 0">
+      {{quesData[0].subjectName}}
+    </ion-title>
+
+    <ion-title slot="end" *ngIf="exmHeader"> <span class="exam-timer" *ngIf="examTime">{{time | async}}</span>
+      <span>{{quesData[0].questionSequence}} / {{this.data.numberOfQues}}</span>
+    </ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="ion-padding-start" *ngIf="examSubjects">
+
+    <ion-spinner style="margin-left: 50%;" *ngIf="isLoading"></ion-spinner>
+    <ion-card class="ion-padding" *ngIf="quesData.length > 0 && !isLoading">
+      <ion-label class="ques-text" [appMathjax]="quesData[0].questionText">
+        Q. {{quesData[0].questionText}}
+      </ion-label>
+      <ion-img *ngIf="quesData[0].questionImage" [src]="quesData[0].questionImage" style="height: 80%; width: 80%;"></ion-img>
+      <ion-radio-group *ngIf="quesData[0].correctAnswerCount == 1" [value]="selectedAnser"
+        (ionChange)="getAnswer($event)">
+        <ion-item lines="none" *ngFor="let que of quesData">
+
+
+
+          <div *ngIf="que.displayBothQandIFlg">
+
+
+            <ion-radio [value]="que"></ion-radio>
+
+            <ion-text style="display: inline-block;">{{que.seqOfAnswerText}}:</ion-text>
+            <ion-label *ngIf="que.answerText" class="answer-text" [appMathjax]="que.answerText">
+              {{que.answerText}}
+            </ion-label>
+
+            <img *ngIf="que.answerImage"  [src]="que.answerImage" />
+
+          </div>
+          <div *ngIf="!que.displayBothQandIFlg">
+
+
+            <ion-radio [value]="que"></ion-radio>
+            <ion-text style="display: inline-block;font-size: 14px;">{{que.seqOfAnswerText}}:</ion-text>
+
+            <ion-label *ngIf="que.answerText" class="answer-text" [appMathjax]="que.answerText">
+              {{que.answerText}}
+            </ion-label>
+
+            <img *ngIf="que.answerImage" class="anser-img" [src]="que.answerImage" />
+
+          </div>
+
+
+
+
+        </ion-item>
+
+      </ion-radio-group>
+      <ion-list *ngIf="quesData[0].correctAnswerCount > 1">
+        <ion-item lines="none" *ngFor="let que of quesData">
+          <div *ngIf="que.displayBothQandIFlg">
+
+
+            <ion-checkbox [value]="que" (ionChange)="getAnswerCheck($event)">
+
+            </ion-checkbox>
+            <ion-text style="display: inline-block;">{{que.seqOfAnswerText}}:</ion-text>
+            <ion-label *ngIf="que.answerText" class="answer-text" [appMathjax]="que.answerText">
+              {{que.answerText}}
+            </ion-label>
+
+            <img *ngIf="que.questionImage" class="anser-img" [src]="que.questionImage" />
+          </div>
+          <div *ngIf="!que.displayBothQandIFlg">
+
+
+            <ion-checkbox [value]="que" (ionChange)="getAnswerCheck($event)">
+
+            </ion-checkbox>
+            <ion-text style="display: inline-block;">{{que.seqOfAnswerText}}:</ion-text>
+            <ion-label *ngIf="que.answerText" class="answer-text" [appMathjax]="que.answerText">
+              {{que.answerText}}
+            </ion-label>
+
+            <img *ngIf="que.questionImage" class="anser-img" [src]="que.questionImage" />
+          </div>
+        </ion-item>
+      </ion-list>
+      <ion-grid class="ion-no-padding action-btns">
+        <ion-row class="ion-no-padding">
+          <ion-col class="ion-no-padding" size="3">
+            <ion-button (click)="prevQue(quesData[0].questionSequence)">
+              <ion-icon name="caret-back-outline"></ion-icon>
+              Prev
+            </ion-button>
+          </ion-col>
+          <ion-col class="ion-no-padding" size="3">
+            <ion-button (click)="nextQue(quesData[0].questionSequence)">Next
+
+              <ion-icon name="caret-forward-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <!-- <ion-col class="ion-no-padding" size="3">
+            <ion-button [disabled]="this.examAsnwer.qpAttemtedAnswerTableType == null"
+              (click)="submitAnswer(quesData[0].questionSequence+1, 'I', 'numSeq')">Save</ion-button>
+
+          </ion-col> -->
+          <ion-col *ngIf="!this.exmHeader.genericQPFlag" class="ion-no-padding" size="3">
+            <ion-button [disabled]="this.examAsnwer.qpAttemtedAnswerTableType == null"
+              (click)="submitAnswerGenericFlg(quesData[0].questionSequence, 'I')">Exit</ion-button>
+
+          </ion-col>
+          <ion-col class="ion-no-padding" size="3">
+            <ion-button (click)="submitRes()">
+              Submit
+            </ion-button>
+          </ion-col>
+
+        </ion-row>
+      </ion-grid>
+
+      <!-- <div class="ion-text-center">
+        <ion-button routerLink="/home" routerDirection="back">Save
+          for later</ion-button>
+      </div> -->
+    </ion-card>
+
+    <ion-grid>
+      <ion-row class="ques-panel">
+        <!-- <ion-col class="quesNavigate" size="2" *ngFor="let queNum of quetsIndexArray; let i = index"
+          (click)="switchQue(queNum.ques, i)"
+          [ngClass]="[queNum.backColor == 'red' ? 'quesNavigatevisit' : '',  queNum.backColor == 'green' ? 'quesNavigateActive' : '', queNum.backColor == 'white' ? 'quesNavigate' : '', selectedAnser.]"
+          > -->
+        <ion-col class="quesNavigate" size="2" *ngFor="let queNum of quetsIndexArray;"
+          (click)="checkVisit(queNum.questionSequence)"
+          [ngClass]="[queNum.isAttempted == '1' ? 'quesNavigateActive' : '', queNum.isQuestionVisited == '1' && queNum.isAttempted == '0' ? 'quesNavigatevisit' : '']">
+          {{queNum.questionSequence}}
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+</ion-content>

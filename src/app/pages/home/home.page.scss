@@ -1,0 +1,47 @@
+img {
+  height: 50px;
+  width: 50px;
+  border-radius: 100px;
+  margin-top: 20px;
+}
+p{
+  margin: 4px;
+}
+ion-text {
+  display: block;
+  color: white;
+}
+
+
+
+ion-card {
+box-shadow: 0 4px 8px 0 #000000d1, 0 6px 20px 0 #00000070;
+
+  p{
+
+    font-size: 15px;
+    font-weight: 600;
+    color: white
+  }
+
+}
+ion-label {
+  text-transform: capitalize;
+  color: white;
+  font-size: 16px;
+  display: block;
+}
+.exam-btns{  
+  margin-right: 20%;
+}
+
+.grid_base{
+  box-shadow: 0 4px 8px 0 #ece9e9d1, 0 6px 20px 0 #b1a5a570;
+// box-shadow: 0 4px 8px 0 #000000d1, 0 6px 20px 0 #00000070;
+
+}
+.base{
+  box-shadow: 0 2px 2px 0 #2485e9d1, 0 2px 3px 0 #16101070;
+
+  border-radius: 2px;
+}

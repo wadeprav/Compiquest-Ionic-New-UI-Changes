@@ -1,0 +1,77 @@
+<ion-app>
+  <ion-menu side="start" menuId="first" contentId="main" class="menu-bar">
+    <ion-header class="ion-no-border">
+      <ion-toolbar>
+        <div style="margin-top: 30px">
+          <div *ngIf="userData" class="ion-text-center">
+            <ion-avatar class="user-thum">
+              <img *ngIf="!userData.candidatePhoto" src="../../../assets/images/userAvatar.png" />
+              <img *ngIf="userData.candidatePhoto" [src]="userData.candidatePhoto" />
+            </ion-avatar>
+            <div class="user-data">
+              <h6>Hello!</h6>
+              <h6>{{userData.candidateName}}</h6>
+              <h6>{{userData.email}}</h6>
+            </div>
+          </div>
+        </div>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+
+      <ion-list style="padding-top: 20px">
+        <ion-item class="ion-no-padding" lines="none">
+          <ion-menu-toggle auto-hide="true">
+            <div class="menu-item" routerLink="/home" routerDirection="forward">
+              <ion-icon style="vertical-align: middle" name="home-outline"></ion-icon>
+              <span style="margin-left: 8px">Dashboard</span>
+            </div>
+          </ion-menu-toggle>
+        </ion-item>
+        <ion-item class="ion-no-padding" lines="none">
+          <ion-menu-toggle auto-hide="true">
+            <div *ngIf="userData">
+              <div class="menu-item" *ngIf="userData.instituteID == 0" routerLink="/create-exam"
+                routerDirection="forward">
+                <ion-icon style="vertical-align: middle" name="calculator"></ion-icon>
+                <span style="margin-left: 8px">Create Exam</span>
+              </div>
+            </div>
+          </ion-menu-toggle>
+
+        </ion-item>
+        <ion-item class="ion-no-padding" lines="none">
+          <ion-menu-toggle auto-hide="true">
+            <div class="menu-item" routerLink="/reports" routerDirection="forward">
+              <ion-icon style="vertical-align: middle" name="document-text-outline"></ion-icon>
+              <span style="margin-left: 8px">My Exam Result Analysis</span>
+            </div>
+          </ion-menu-toggle>
+        </ion-item>
+        <ion-item class="ion-no-padding" lines="none">
+          <ion-menu-toggle auto-hide="true">
+            <div class="menu-item" routerLink="/profile" routerDirection="forward">
+              <ion-icon style="vertical-align: middle" name="person-outline"></ion-icon>
+              <span style="margin-left: 8px">My Profile</span>
+            </div>
+          </ion-menu-toggle>
+        </ion-item>
+      
+        
+
+        <ion-item (click)="logout()" class="ion-no-padding" lines="none">
+          <ion-menu-toggle auto-hide="true">
+            <div class="menu-item">
+
+              <ion-icon style="vertical-align: middle" name="log-out-outline"></ion-icon>
+              <span style="margin-left: 8px">Logout</span>
+            </div>
+          </ion-menu-toggle>
+
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="main"></ion-router-outlet>
+</ion-app>
+

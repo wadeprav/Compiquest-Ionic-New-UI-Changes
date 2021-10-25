@@ -1,0 +1,180 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons> -->
+    <ion-title>
+      Exam Information
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="isLoading" class="ion-text-center" style="margin-top: 50px;">
+    <ion-spinner></ion-spinner>
+  </div>
+  <div>
+    <p class="exam-det-header">
+      Exam Details
+    </p>
+    <ion-card class="ion-margin" *ngIf="resumeExamData">
+      <ion-grid *ngIf="resumeExamData.resumeExamSubjectDetails">
+
+        <ion-row>
+          <ion-col size="7">
+            <ion-label>Total Questions:</ion-label>
+          </ion-col>
+          <ion-col size="5">
+            <ion-text>{{resumeExamData.resumeExamSubjectDetails.noOfQuestions}}</ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="7">
+            <ion-label>Attempted Questions</ion-label>
+          </ion-col>
+          <ion-col>
+            <ion-text>{{resumeExamData.resumeExamSubjectDetails.attemptedQcount}}</ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="7">
+            <ion-label>UnAttempted Questions</ion-label>
+          </ion-col>
+          <ion-col>
+            <ion-text>{{resumeExamData.resumeExamSubjectDetails.unAttemptedQcount}}</ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="7">
+            <ion-label>Negative Marks Per Questions</ion-label>
+          </ion-col>
+          <ion-col>
+            <ion-text>{{resumeExamData.resumeExamSubjectDetails.negativeMarksPerQues}}</ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+
+  </div>
+  <div class="ion-padding" *ngIf="examSubjects">
+    <div *ngFor="let exam of examSubjects; let i = index">
+      <ion-item *ngIf="resumeExamData">
+        <ion-label (click)="expandContent(i)">{{exam.subjectName}}</ion-label>
+        <ion-button *ngIf="!resumeExamData.resumeExamHeader"
+          (click)="gotoExamTake(exam.subjectID, startExamData.durationMins, exam.noOfQuestions)">
+          {{exdata.isExamAppeared == true ? 'Resume Exam' :
+          'Start Exam'}}
+        </ion-button>
+        <ion-button *ngIf="resumeExamData.resumeExamHeader"
+          [disabled]="!resumeExamData.resumeExamHeader.isExamCompleted == 'I'"
+          (click)="gotoExamTake(exam.subjectID, resumeExamData.resumeExamHeader.durationMins/60, exam.noOfQuestions)">
+          {{resumeExamData.resumeExamHeader.isExamAppeared == true ? 'Resume Exam' :
+          'Start Exam'}}
+        </ion-button>
+        <!-- <ion-button *ngIf="!resumeExamData.resumeExamHeader"
+          (click)="gotoExamTake(exam.subjectID, startExamData.durationMins, exam.noOfQuestions)">
+          {{resumeExamData.resumeExamHeader.isExamAppeared == true ? 'Resume Exam' :
+          'Start Exam'}}
+        </ion-button>
+        <ion-button *ngIf="resumeExamData.resumeExamHeader"
+          (click)="gotoExamTake(exam.subjectID, resumeExamData.resumeExamHeader.durationMins/60, exam.noOfQuestions)">
+          {{resumeExamData.resumeExamHeader.isExamAppeared == true ? 'Resume Exam' :
+          'Start Exam'}}
+        </ion-button> -->
+        <ion-icon *ngIf="exam.toggle == false" name="add-outline"></ion-icon>
+        <ion-icon *ngIf="exam.toggle == true" name="remove-outline"></ion-icon>
+      </ion-item>
+
+      <app-expandable [expanded]="exam.toggle == true" expandHeight="500px">
+
+        <ion-card>
+          <ion-grid>
+
+            <ion-row>
+              <ion-col size="7">
+                <ion-label>Subject</ion-label>
+              </ion-col>
+              <ion-col size="5">
+                <ion-text>{{exam.subjectName}}</ion-text>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="7">
+                <ion-label>No Of Questions</ion-label>
+              </ion-col>
+              <ion-col>
+                <ion-text>{{exam.noOfQuestions}}</ion-text>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col size="7">
+                <ion-label>Marks</ion-label>
+              </ion-col>
+              <ion-col>
+                <ion-text>{{exam.maximumMarksPerSubject}}</ion-text>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col size="7">
+                <ion-label>-Ve Marks</ion-label>
+              </ion-col>
+              <ion-col>
+                <ion-text>{{exam.negativeMarksPerQues}}</ion-text>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col size="7">
+                <ion-label>Paper No</ion-label>
+              </ion-col>
+              <ion-col>
+                <ion-text>{{exam.subjectID}}</ion-text>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col size="7">
+                <ion-label> Duration Mins</ion-label>
+              </ion-col>
+              <ion-col>
+                <ion-text>{{exam.subDurationMins}}</ion-text>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="7">
+                <ion-label>Marks Per Question</ion-label>
+              </ion-col>
+              <ion-col>
+                <ion-text>{{exam.marksPerQuestion}}</ion-text>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="7">
+                <ion-label> Part of Question Paper</ion-label>
+              </ion-col>
+              <ion-col>
+                <ion-text>{{exam.partOfQuestionPaper}}</ion-text>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col *ngIf="resumeExamData">
+                <!-- <ion-button (click)="gotoExamTake(exam.subjectID, exam.subDurationMins, exam.noOfQuestions)">
+                  {{data.isAppeared == true ? 'Resume Exam' :
+                  'Start Exam'}}
+                </ion-button> -->
+
+
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card>
+
+
+
+      </app-expandable>
+    </div>
+
+  </div>
+</ion-content>

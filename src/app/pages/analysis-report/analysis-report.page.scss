@@ -1,0 +1,31 @@
+p{
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+
+}
+
+h2{
+    text-align: center !important;
+    background: #428cff;
+    height: 46px;
+    padding: 6px;
+    border-top-right-radius: 18px;
+    border-bottom-right-radius: 25px;
+    box-shadow: 2px 2px grey;
+    width: 60%;
+    color: azure;
+
+
+}
+ion-card {
+    --background: #f9f9f9 !important;
+    width: inherit !important;
+    box-shadow: 0 4px 8px 0 #000000d1, 0 6px 20px 0 #00000070;
+
+    --ion-font-family: -apple-system, BlinkMacSystemFont, 'Montserrat','Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue' !important;
+}
+.grid_base{
+    box-shadow: 0 4px 8px 0 #000000d1, 0 6px 20px 0 #00000070;
+    
+    }

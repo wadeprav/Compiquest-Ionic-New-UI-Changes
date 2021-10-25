@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/exam-result/1"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Question Result</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="questionResults.length == 0" class="ion-text-center" style="margin-top: 30%;">
+    <ion-spinner>
+
+    </ion-spinner>
+  </div>
+
+  <ion-card *ngFor="let res of questionResults" class="ion-padding ion-margin-bottom">
+    <p> Q. {{res.questionsequence}}
+
+      <span *ngIf="res.correctOption == res.attemptedOption"
+        style="color: green;background-color:yellow; padding: 5px;">Correct</span>
+      <span *ngIf="res.correctOption != res.attemptedOption && res.attemptedOption!=null"
+        style="color: red;background-color:yellow; padding: 5px;">Wrong</span>
+      <span *ngIf="res.attemptedOption==null"
+        style="color: red;background-color:yellow; padding: 5px;">Unattempted</span>
+    </p>
+    <p [appMathjax]="res.questionText" style=" overflow: hidden;">{{res.questionText}}</p>
+    <p *ngIf="res.questionImage != null"> <img src="{{res.questionImage}}"></p>
+    <ion-text>
+      Correct Answer:
+    </ion-text>
+    <p [appMathjax]="res.correctAnsText">{{res.correctAnsText}}</p>
+    <p *ngIf="res.correctAnsText == null">
+      <img src="{{res.correctAnswerImage}}">
+    </p>
+
+    <ion-text>Attempted Answer</ion-text>
+    <p [appMathjax]="res.attemptedAnsText">{{res.attemptedAnsText}}</p>
+    <p *ngIf="res.correctAnsText == null"> <img src="{{res.attemptedAnswerImage}}"></p>
+
+    <div *ngIf="res.answerSolnText != null || res.solution != null">
+      <ion-text>Solution</ion-text>
+      <p *ngIf="res.solution == null" [appMathjax]="res.answerSolnText">{{res.AnswerSolnText}}</p>
+      <p *ngIf="res.answerSolnText == null"> <img src="{{res.solution}}"></p>
+    </div>
+    <!-- <p *ngIf="res.correctOption == res.attemptedOption" style="color: green;background-color:yellow" >Correct</p>
+        <p *ngIf="res.correctOption != res.attemptedOption" style="color: red;background-color:yellow" >Wrong</p> -->
+  </ion-card>
+</ion-content>

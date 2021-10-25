@@ -1,0 +1,67 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+/* Set variables for all modes */
+:root {
+    /* Set the background of the entire app */
+    /* Set the font family of the entire app */
+    --ion-font-family: -apple-system, BlinkMacSystemFont,'Open Sans', 'Montserrat','Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue' !important;
+  }
+ion-title {
+    color: #696969;
+    --ion-font-family: -apple-system, BlinkMacSystemFont, 'Montserrat','Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue' !important;
+}
+
+ion-button {
+    color: #fff;
+    font-size: 14px;
+    text-transform: none;
+    --background: #2fdf75;
+    --ion-font-family: -apple-system, BlinkMacSystemFont, 'Montserrat','Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue' !important;
+}
+ion-title {
+    font-size: 18px;
+font-weight: bold;
+    --ion-font-family: -apple-system, BlinkMacSystemFont, 'Montserrat','Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue' !important;
+}
+ion-label {
+    font-size: 16px;
+    --ion-font-family: -apple-system, BlinkMacSystemFont, 'Montserrat','Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue' !important;
+}
+ion-card{
+    --background: #428cff;
+    --ion-font-family: -apple-system, BlinkMacSystemFont, 'Montserrat','Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue' !important;
+  }
+
+  ion-input{
+    font-size: 16px;
+    --padding-start: 20px;
+    --padding-top: 20px;
+    --padding-bottom: 10px;
+    --padding-end: 10;
+    --ion-font-family: -apple-system, BlinkMacSystemFont, 'Montserrat','Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue' !important;
+}

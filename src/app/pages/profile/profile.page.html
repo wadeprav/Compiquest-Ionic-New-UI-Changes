@@ -1,0 +1,167 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" >
+  <form [formGroup]="regForm" (ngSubmit)="updateUserProfile()" class="ion-padding base">
+    <ion-item >
+      <ion-label position="floating">First Name:</ion-label>
+      <ion-input
+        [class.error-input]="!regForm.controls.firstname.valid  && (regForm.controls.firstname.dirty || submitAttempt)"
+        formControlName="firstname"></ion-input>
+      <p style="text-align: center; color: #ea6153"
+        *ngIf="!regForm.controls.firstname.valid  && (regForm.controls.firstname.dirty || submitAttempt)">
+        Please Enter Valid First Name.
+      </p>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Middle Name:</ion-label>
+      <ion-input
+        [class.error-input]="!regForm.controls.middlename.valid  && (regForm.controls.middlename.dirty || submitAttempt)"
+        formControlName="middlename"></ion-input>
+      <p style="text-align: center; color: #ea6153"
+        *ngIf="!regForm.controls.middlename.valid  && (regForm.controls.middlename.dirty || submitAttempt)">
+        Please Enter Valid Middle Name.
+      </p>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Last Name:</ion-label>
+      <ion-input
+        [class.error-input]="!regForm.controls.lastname.valid  && (regForm.controls.lastname.dirty || submitAttempt)"
+        type="text" formControlName="lastname"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Full Name:</ion-label>
+      <ion-input type="text" formControlName="fullname"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Adhar Card No:</ion-label>
+      <ion-input type="text" formControlName="adharCardNo"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Mobile:</ion-label>
+      <ion-input type="tel"
+        [class.error-input]="!regForm.controls.mobile.valid  && (regForm.controls.mobile.dirty || submitAttempt)"
+        formControlName="mobile" readonly></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Email Address:</ion-label>
+      <ion-input
+        [class.error-input]="!regForm.controls.emailID.valid  && (regForm.controls.emailID.dirty || submitAttempt)"
+        type="text" formControlName="emailID" readonly></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Address:</ion-label>
+      <ion-input type="text" formControlName="address"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Institute Name:</ion-label>
+      <ion-input type="text" formControlName="instituteId"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">City:</ion-label>
+      <ion-input type="text" formControlName="city"></ion-input>
+    </ion-item>
+    <div class="ion-margin-top" *ngIf="userRes">
+      <!-- <ion-label>Select State:</ion-label> -->
+      <div *ngIf="getSelectedState(userRes.stateId) > -1">
+        <ion-select [value]="stateArray[stateInd]" (ionChange)="getState($event)">
+          <ion-select-option *ngFor="let state of stateArray" [value]="state">{{state.stateDescription}}
+          </ion-select-option>
+        </ion-select>
+      </div>
+
+    </div>
+    <div class="ion-margin-top">
+      <!-- <ion-label>Gender:</ion-label> -->
+      <ion-radio-group [value]="genderVal" (ionChange)="getGender($event)">
+
+        <ion-item>
+          <ion-radio value="M"></ion-radio>
+          <ion-label>Male</ion-label>
+
+          <ion-radio value="F"></ion-radio>
+          <ion-label>Female</ion-label>
+
+        </ion-item>
+      </ion-radio-group>
+    </div>
+    <!-- <ion-item class="ion-margin-top">
+      <ion-label position="floating">Photo:</ion-label>
+      <ion-input type="text" formControlName="photo"></ion-input>
+    </ion-item> -->
+    <ion-item>
+      <ion-label position="floating">College:</ion-label>
+      <ion-input type="text" formControlName="collegeName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Date of Birth:</ion-label>
+      <ion-datetime formControlName="dateOfBirth"></ion-datetime>
+    </ion-item>
+
+    <div class="ion-margin-top">
+      <ion-label>Repeater:</ion-label>
+      <ion-radio-group [value]="repeatr" (ionChange)="getRepetr($event)">
+
+        <ion-item>
+          <ion-radio value="true"></ion-radio>
+          <ion-label>Yes</ion-label>
+
+          <ion-radio value="false"></ion-radio>
+          <ion-label>No</ion-label>
+
+        </ion-item>
+      </ion-radio-group>
+    </div>
+    <ion-item>
+      <ion-label position="floating">Parent Email:</ion-label>
+      <ion-input
+        [class.error-input]="!regForm.controls.parentEmailID.valid  && (regForm.controls.parentEmailID.dirty || submitAttempt)"
+        type="text" formControlName="parentEmailID"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Parent First Name:</ion-label>
+      <ion-input
+        [class.error-input]="!regForm.controls.parentFName.valid  && (regForm.controls.parentFName.dirty || submitAttempt)"
+        type="text" formControlName="parentFName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Parent Last Name:</ion-label>
+      <ion-input
+        [class.error-input]="!regForm.controls.parentLName.valid  && (regForm.controls.parentLName.dirty || submitAttempt)"
+        type="text" formControlName="parentLName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Parent Middle Name:</ion-label>
+      <ion-input
+        [class.error-input]="!regForm.controls.parentMName.valid  && (regForm.controls.parentMName.dirty || submitAttempt)"
+        type="text" formControlName="parentMName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Parent Mobile:</ion-label>
+      <ion-input type="tel"
+        [class.error-input]="!regForm.controls.parentMobile.valid  && (regForm.controls.parentMobile.dirty || submitAttempt)"
+        type="text" formControlName="parentMobile"></ion-input>
+    </ion-item>
+    <!-- <div class="ion-margin-top">
+      <ion-label>Class:</ion-label>
+      <ion-input 
+      type="text" formControlName="class"></ion-input> -->
+    <!-- <ion-select placeholder="select class" formControlName="class" (ionChange)="getClass($event)">
+        <ion-select-option>8th</ion-select-option>
+        <ion-select-option>9th</ion-select-option>
+      </ion-select> -->
+    <!-- </div> -->
+    <div class="ion-margin-top ion-text-center">
+      <ion-button type="submit">Save</ion-button>
+      <ion-button (click)="Cancel()">Cancel</ion-button>
+
+    </div>
+  </form>
+</ion-content>

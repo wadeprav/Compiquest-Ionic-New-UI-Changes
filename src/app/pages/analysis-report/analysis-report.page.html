@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/exam-result/1">
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>My Exam Result Analysis</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content >
+
+
+    <div *ngFor="let set of setArray; let i = index" id="{{i}}">
+      <ion-card  style="width:400px" id="{{i}}">
+      
+        <h2  *ngIf="set['examType'] == 1">NEET</h2>
+        <h2 *ngIf="set['examType'] == 2">CET</h2>
+        <h2  *ngIf="set['examType'] == 3">JEE</h2>
+
+
+
+
+        <canvas baseChart id="c{{i}}" [data]="labelData[i]['data']" [labels]="doughnutChartLabels" [options]="chartOptions"
+          [chartType]="doughnutChartType">
+        </canvas>
+        <p >Analysis</p>
+
+
+        <div class="card-body">
+          <div *ngFor="let sets of set['data'];let n = index;let l = count;">
+
+            <canvas baseChart id="canv_{{n}}" [data]="sets['data']" [labels]="doughnutChartLabels"  [options]="chartOptions"
+              [chartType]="doughnutChartType">
+            </canvas>
+            <p >{{sets['subject']}}</p>
+          </div>
+        </div>
+      </ion-card>
+        <br>
+      </div>
+ 
+
+
+  
+</ion-content>

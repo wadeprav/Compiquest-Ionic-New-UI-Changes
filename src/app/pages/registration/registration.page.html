@@ -1,0 +1,214 @@
+<ion-header mode="ios" class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/login" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Candidate Registration</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="regForm" (ngSubmit)="submitCandidate()" class="ion-padding">
+    <ion-grid class="base">
+      <ion-row>
+        <ion-col size-xs="4" size-md="4" size-lg="4">
+          <p>First Name</p>
+        </ion-col>
+        <ion-col size-xs="8" size-md="8" size-lg="8">
+          <ion-input type="text" placeholder="First Name"
+            [class.error-input]="!regForm.controls.firstname.valid  && (regForm.controls.firstname.dirty || submitAttempt)"
+            formControlName="firstname">
+
+          </ion-input>
+          <p style="text-align: center; color: #ea6153"
+            *ngIf="!regForm.controls.firstname.valid  && (regForm.controls.firstname.dirty || submitAttempt)">
+            Please Enter Valid First Name.
+          </p>
+        </ion-col>
+
+      </ion-row>
+      <ion-row>
+        <ion-col size-xs="4" size-md="4" size-lg="4">
+          <p>Middle Name</p>
+        </ion-col>
+        <ion-col size-xs="8" size-md="8" size-lg="8">
+          <ion-input type="text"
+            [class.error-input]="!regForm.controls.middlename.valid  && (regForm.controls.middlename.dirty || submitAttempt)"
+            placeholder="Middle Name" formControlName="middlename">
+
+          </ion-input>
+          <p style="text-align: center; color: #ea6153"
+            *ngIf="!regForm.controls.middlename.valid  && (regForm.controls.middlename.dirty || submitAttempt)">
+            Please Enter Valid Middle Name.
+          </p>
+        </ion-col>
+
+      </ion-row>
+      <ion-row>
+        <ion-col size-xs="4" size-md="4" size-lg="4">
+          <p>Last Name</p>
+        </ion-col>
+        <ion-col size-xs="8" size-md="8" size-lg="8">
+          <ion-input
+            [class.error-input]="!regForm.controls.lastname.valid  && (regForm.controls.lastname.dirty || submitAttempt)"
+            type="text" placeholder="Last Name" formControlName="lastname">
+
+          </ion-input>
+          <p style="text-align: center; color: #ea6153"
+            *ngIf="!regForm.controls.lastname.valid  && (regForm.controls.lastname.dirty || submitAttempt)">
+            Please Enter Valid Last Name.
+          </p>
+        </ion-col>
+
+      </ion-row>
+      <ion-row>
+        <ion-col size-xs="4" size-md="4" size-lg="4">
+          <p>Email</p>
+        </ion-col>
+        <ion-col size-xs="8" size-md="8" size-lg="8">
+          <ion-input
+            [class.error-input]="!regForm.controls.email.valid  && (regForm.controls.email.dirty || submitAttempt)"
+            type="email" placeholder="Email" formControlName="email" (ionChange)="checkEmail($event)">
+
+          </ion-input>
+          <p style="text-align: center; color: #ea6153"
+            *ngIf="!regForm.controls.email.valid  && (regForm.controls.email.dirty || submitAttempt)">
+            Please Enter Valid Email.
+          </p>
+          <p style="text-align: center; color: #ea6153" *ngIf="isEmailAvail != undefined && isEmailAvail != 'AVAILABLE'">
+            Email already exists!
+          </p>
+          <!-- <p style="text-align: center; color: #ea6153" *ngIf="isEmailAvail == 'AVAILABLE'">
+            Email is Available.
+          </p> -->
+        </ion-col>
+
+      </ion-row>
+      <ion-row>
+        <ion-col size-xs="4" size-md="4" size-lg="4">
+          <p>Mobile</p>
+        </ion-col>
+        <ion-col size-xs="8" size-md="8" size-lg="8">
+          <ion-input type="tel" placeholder="Mobile" formControlName="mobile" maxlength="10" minlength="10"
+            (ionChange)="checkMobile($event)">
+
+          </ion-input>
+          <!-- <p style="text-align: center; color: #ea6153"
+            *ngIf="!regForm.controls.mobile.valid  && (regForm.controls.mobile.dirty || submitAttempt)">
+            Please Enter Valid Mobile.
+          </p> -->
+        </ion-col>
+
+      </ion-row>
+      <ion-row>
+        <ion-col size-xs="4" size-md="4" size-lg="4">
+          <p>Date of Birth</p>
+        </ion-col>
+        <ion-col size-xs="8" size-md="8" size-lg="8">
+          <ion-icon name="calendar-number-outline"> </ion-icon>
+          <ion-datetime pickerFormat="YYYY-MM-DD" min="1900-01-01" displayFormat="YYYY-MM-DD"
+            placeholder="Date of Birth" value="1900-01-01" formControlName="dateOfBirth"> </ion-datetime>
+        </ion-col>
+
+      </ion-row>
+      <ion-row>
+        <ion-col size-xs="4" size-md="4" size-lg="4">
+          <p>Parent First Name</p>
+        </ion-col>
+        <ion-col size-xs="8" size-md="8" size-lg="8">
+          <ion-input
+            [class.error-input]="!regForm.controls.parentfirstname.valid  && (regForm.controls.parentfirstname.dirty || submitAttempt)"
+            type="text" placeholder="Parent First Name" formControlName="parentfirstname">
+
+          </ion-input>
+          <p style="text-align: center; color: #ea6153"
+            *ngIf="!regForm.controls.parentfirstname.valid && (regForm.controls.parentfirstname.dirty || submitAttempt)">
+            Please Enter Valid Parent First Name.
+          </p>
+        </ion-col>
+
+      </ion-row>
+      <ion-row>
+        <ion-col size-xs="4" size-md="4" size-lg="4">
+          <p>Parent Middle Name</p>
+        </ion-col>
+        <ion-col size-xs="8" size-md="8" size-lg="8">
+          <ion-input
+            [class.error-input]="!regForm.controls.parentmiddlename.valid  && (regForm.controls.parentmiddlename.dirty || submitAttempt)"
+            type="text" placeholder="Parent Middle Name" formControlName="parentmiddlename">
+
+          </ion-input>
+          <p style="text-align: center; color: #ea6153"
+            *ngIf="!regForm.controls.parentmiddlename.valid && (regForm.controls.parentmiddlename.dirty || submitAttempt)">
+            Please Enter Valid Parent Middle Name.
+          </p>
+        </ion-col>
+
+      </ion-row>
+      <ion-row>
+        <ion-col size-xs="4" size-md="4" size-lg="4">
+          <p>Parent Last Name</p>
+        </ion-col>
+        <ion-col size-xs="8" size-md="8" size-lg="8">
+          <ion-input
+            [class.error-input]="!regForm.controls.parentlastname.valid  && (regForm.controls.parentlastname.dirty || submitAttempt)"
+            type="text" placeholder="Parent Last Name" formControlName="parentlastname">
+
+          </ion-input>
+          <p style="text-align: center; color: #ea6153"
+            *ngIf="!regForm.controls.parentlastname.valid && (regForm.controls.parentlastname.dirty || submitAttempt)">
+            Please Enter Valid Parent Last Name.
+          </p>
+        </ion-col>
+
+      </ion-row>
+      <ion-row>
+        <ion-col size-xs="4" size-md="4" size-lg="4">
+          <p>Parent Mobile Number</p>
+        </ion-col>
+        <ion-col size-xs="8" size-md="8" size-lg="8">
+          <ion-input type="tel" placeholder="Parent Mobile Number" formControlName="parentmobilenumber" maxlength="10">
+
+          </ion-input>
+        </ion-col>
+
+
+
+      </ion-row>
+      <ion-row>
+        <ion-col size-xs="4" size-md="4" size-lg="4">
+          <p>Parent Email</p>
+        </ion-col>
+        <ion-col size-xs="8" size-md="8" size-lg="8">
+          <ion-input
+            [class.error-input]="!regForm.controls.parentEmail.valid  && (regForm.controls.parentEmail.dirty || submitAttempt)"
+            type="text" placeholder="Parent Email" formControlName="parentEmail">
+
+          </ion-input>
+          <p style="text-align: center; color: #ea6153"
+            *ngIf="!regForm.controls.parentEmail.valid && (regForm.controls.parentEmail.dirty || submitAttempt)">
+            Please Enter Valid Parent Email.
+          </p>
+        </ion-col>
+
+
+
+      </ion-row>
+    </ion-grid>
+    <br>
+    <ion-item lines="none">
+      <ion-checkbox></ion-checkbox>
+      <ion-label>I accept detailed Terms and Privacy Policy</ion-label>
+    </ion-item>
+
+    <div class="ion-text-center">
+      <ion-button [disabled]="!regForm.valid" type="submit">
+        <ion-text *ngIf="!isLoading">Register</ion-text>
+        <ion-spinner *ngIf="isLoading"></ion-spinner>
+      </ion-button>
+      <ion-button (click)="cancelBtn()">
+        Cancel
+      </ion-button>
+    </div>
+  </form>
+</ion-content>

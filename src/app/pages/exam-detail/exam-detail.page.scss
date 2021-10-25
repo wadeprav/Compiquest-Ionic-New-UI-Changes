@@ -1,0 +1,57 @@
+p {
+    margin: 0px;
+    color: white;
+    font-size: 14px;
+}
+
+ion-card{
+    box-shadow: 0 4px 8px 0 #ece9e9d1, 0 6px 20px 0 #b1a5a570;
+  
+    }
+ion-label {
+    font-size: 14px;
+    color: white;
+}
+ion-text {
+    color: white;
+}
+.notice-cont {
+
+    ion-label{
+        font-size: 18px;
+        font-weight: 600;
+       
+    }
+    p {
+        color: red;
+        font-weight: 500;
+    }
+}
+
+ion-col {
+    border: 1px solid darkgrey;
+}
+
+.exam-subs-detail ion-col {
+    font-size: 12px;
+}
+.exam-subs-detail ion-text {
+    display: block;
+    margin-top: 10px;
+}   
+
+.cand-data-grid{
+ padding: 10px;
+}
+ p {
+    margin: 5px;
+    font-weight: 600;
+}
+ion-label {
+    margin: 5px;
+}
+ion-card.sub-detail {
+    width: 100%;
+    text-align: start;
+    padding: 16px;
+}

@@ -1,0 +1,7 @@
+{
+  "name": "CompiQuest",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,121 @@
+<ion-header>
+  <ion-toolbar>
+
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="data">
+      {{data.isAppeard == true ? 'Resume Exam' :
+      'Start Exam'}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-text-center" style="height: 100%; width: 100%;" *ngIf="isLoading">
+    <ion-spinner style="margin-top: 50%;"></ion-spinner>
+  </div>
+  <ion-card class="cand-data-grid" *ngIf="candidateData">
+    <ion-label>Institute:</ion-label>
+
+    <p>{{candidateData.instituteName}}</p>
+    <ion-label>Enrolled On:</ion-label>
+
+    <p>{{candidateData.examEnrollmentDate}}</p>
+
+    <ion-label>Remaining Duration:</ion-label>
+
+    <p *ngIf="candidateData.durationMins">{{candidateData.durationMins}} mins</p>
+    <p *ngIf="!candidateData.durationMins">0 mins</p>
+
+    <ion-label>Question Paper:</ion-label>
+
+    <p>{{candidateData.qpUniqueName}}</p>
+
+    <ion-label>Total Questions:</ion-label>
+
+    <p *ngIf="candidateData.noOfQuestions">{{candidateData.noOfQuestions}}</p>
+    <p *ngIf="!candidateData.noOfQuestions">0</p>
+
+    <ion-label>Max Marks:</ion-label>
+
+    <p *ngIf="candidateData.maximumMarksForExam">{{candidateData.maximumMarksForExam}}</p>
+    <p *ngIf="!candidateData.maximumMarksForExam">0</p>
+  </ion-card>
+  <div class="ion-padding ion-text-center">
+    <div class="notice-cont ion-margin-top">
+      <div class="ion-margin-top">
+        <p>To {{data.isAppeard == true ? 'Resume' :
+          'Start'}} the exam, please click </p>
+        <p>Detailed Subject wise summary is described in Next Screen.</p>
+        <ion-button class="ion-margin-top" (click)="gotoExamScreen()">{{data.isAppeard == true ? 'Resume Exam' :
+          'Start Exam'}}</ion-button>
+      </div>
+    </div>
+
+
+
+  </div>
+
+  <ion-slides *ngIf="examTable.length > 0">
+    <ion-slide *ngFor="let examSub of examTable">
+      <ion-card class="sub-detail">
+        <ion-text>Subject</ion-text>
+        <p>
+          {{examSub.subjectName}}
+        </p>
+        <ion-text>
+          No. of Questions
+        </ion-text>
+        <p>
+          {{examSub.noOfQuestions}}
+        </p>
+        <ion-text>Marks</ion-text>
+        <p>{{examSub.maximumMarksPerSubject}}</p>
+        <ion-text> -Ve Marks</ion-text>
+        <p>{{examSub.negativeMarksPerQues}}</p>
+        <ion-text>Paper No</ion-text>
+        <p>{{examSub.subjectID}}</p>
+        <ion-text>
+          Duration Mins
+        </ion-text>
+        <p>{{examSub.subDurationMins}}</p>
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
+
+  <!-- <div class="ion-margin">
+    <h5>General Instructions or Guidelines :</h5>
+    <p>Before Begining of the exam</p>
+
+
+    <ion-text>1. Make sure you have the good Internet connection.<br>
+      2. If you are taking the exam late in the day, it is recommended that you reboot your computer before
+      beginning to free up memory resources from other programs on your computer.<br>
+      3. Shut down all instant Messaging tools (Skype, AIM, MSN Messenger) and Email programs as they can conflict
+      with Blackboard.<br>
+      4. Enter the exam using Firefox or google chrome. Do not use any other internet browser.<br>
+      5. Maximize your browser window before starting the test. Minimizing the browser window during the exam can
+      prevent the submission of your exam.<br>
+      6. When you begin the exam click the START Exam button only ONCE to launch the test. Double clicking can lock
+      the test.<br>
+    </ion-text>
+
+  </div>
+
+  <div class="ion-margin">
+    <h5>During the exam:</h5>
+    <ion-text>
+      1. Do not begin until you are absolutely ready to start!<br>
+      2. Do not resize (minimize) the browse during the test<br>
+      3. The exam must be completed in one sitting. You can only open it once.<br>
+      4. Avoid using the scroll button on your mouse if present.<br>
+      5. You will have 180 minutes to complete your exam.<br>
+      6. Answer all questions in the exam.<br>
+      7. Click the “Submit” button to submit your exam. Do not press “Enter” on the keyboard to submit the exam.<br>
+      <p style="color: red;"> 8. Timer will be displayed at the right hand corner and the Exam Window will be
+        automatically Closed after Time
+        out.</p><br>
+    </ion-text>
+  </div> -->
+</ion-content>

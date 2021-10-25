@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      <div class="ion-text-center">Login</div>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="ion-margin base ion-text-center grid_base">
+    <ion-row >
+      <ion-col offsetSm="4" sizeSm="5" >
+        <div class="ion-text-center">
+          <img src="../../../assets/images/exam-logo.jpeg" style="width:70%;height:70%" />
+        </div>
+        <form [formGroup]="userForm" (ngSubmit)="login()" class="ion-margin-top">
+          <ion-item class="base">
+            <ion-label position="floating">Username</ion-label>
+            <ion-input type="text" formControlName="username">
+
+            </ion-input>
+          </ion-item>
+          <br>
+          <ion-item  class="base margin">
+            <ion-label position="floating">Password</ion-label>
+            <ion-input type="password" formControlName="password">
+
+            </ion-input>
+          </ion-item>
+          <br>
+
+          <ion-item lines="none" class="margin">
+
+            <ion-checkbox>
+
+            </ion-checkbox>
+            <ion-label>Remember me</ion-label>
+
+          </ion-item>
+
+          <div class="ion-text-center">
+
+            <ion-button color="success" style="height: 50px;" expand="block" [disabled]="!userForm.valid" type="submit">
+              <ion-text *ngIf="!isLoading">LOGIN</ion-text>
+              <ion-spinner *ngIf="isLoading"></ion-spinner>
+            </ion-button>
+          </div>
+          <p style="color: red;">Forgot Password?</p>
+          <p style="color: blue;font-size: 12px;">For Subscription, Visit www.compiquest.com</p>
+
+        </form>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+</ion-content>
+
+
+<ion-footer>
+  <div class="ion-text-center">
+    <p>If you don't have a Account. <span style="color: green;" (click)="gotoRegistration()">Sign up</span></p>
+  </div>
+</ion-footer>

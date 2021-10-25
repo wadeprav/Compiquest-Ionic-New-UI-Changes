@@ -1,0 +1,104 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons> -->
+    <ion-title>Create Exam</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-padding">
+
+    <div class="ion-margin-top">
+      <ion-label>
+        Paper Type:
+      </ion-label>
+      <ion-radio-group (ionChange)="getAllExams($event)">
+        <ion-item>
+          <ion-radio value="generic"></ion-radio>
+          <ion-label>Generic</ion-label>
+          <ion-radio value="self"></ion-radio>
+          <ion-label>Self</ion-label>
+        </ion-item>
+      </ion-radio-group>
+    </div>
+
+    <div class="ion-margin-top" *ngIf="allExamType.length > 0">
+      <ion-label>
+        Exam
+      </ion-label>
+      <ion-select (ionChange)="crExamType == 'self' ? getExamType($event): getGenericExam($event)"
+        placeholder="Select exam">
+        <ion-select-option *ngFor="let exam of allExamType" [value]="exam">{{exam.examName}}</ion-select-option>
+      </ion-select>
+    </div>
+
+    <div class="ion-margin-top" *ngIf="crExamType == 'self'">
+      <ion-label>Complexity:</ion-label>
+      <ion-radio-group value="tough" (ionChange)="getComplexity($event)">
+        <ion-item>
+          <ion-radio value="tough"></ion-radio>
+          <ion-label>Tough</ion-label>
+          <ion-radio value="regular"></ion-radio>
+          <ion-label>Regular</ion-label>
+        </ion-item>
+      </ion-radio-group>
+    </div>
+    <div class="ion-margin-top" *ngIf="crExamType == 'self'">
+      <ion-label>Paper Content:</ion-label>
+      <ion-radio-group value="mock" (ionChange)="selectPapCont($event)">
+        <ion-item>
+          <ion-radio value="mock"></ion-radio>
+          <ion-label>Mock Test</ion-label>
+          <ion-radio value="subject"></ion-radio>
+          <ion-label>Subject</ion-label>
+        </ion-item>
+      </ion-radio-group>
+    </div>
+
+    <ion-grid class="ion-no-padding">
+      <ion-row class="ion-no-padding ion-margin-top" *ngIf="papCont == 'subject' && crExamType == 'self'">
+        <ion-col size="12" *ngIf="subList.length > 0">
+          <ion-label> Subjects:</ion-label>
+          <ion-select interface="action-sheet" placeholder="Select subject" (ionChange)="getSub($event)">
+            <ion-select-option *ngFor="let sub of subList" [value]="sub">{{sub.subjectName}}</ion-select-option>
+          </ion-select>
+        </ion-col>
+        <ion-col size="12" *ngIf="secList.length > 0">
+          <ion-label>Sections:</ion-label>
+          <ion-select interface="action-sheet" placeholder="Select section" (ionChange)="getSec($event)">
+            <ion-select-option *ngFor="let sec of secList" [value]="sec">{{sec.sectionName}}</ion-select-option>
+          </ion-select>
+        </ion-col>
+        <ion-col size="12" *ngIf="lessonList.length > 0">
+          <ion-label>Lessons:</ion-label>
+          <ion-select interface="action-sheet" placeholder="Select lesson" (ionChange)="getLes($event)">
+            <ion-select-option *ngFor="let leson of lessonList" [value]="leson">{{leson.lessonName}}</ion-select-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-margin-top" *ngIf="crExamType == 'generic' && gnericPaperList.length > 0">
+        <ion-label>
+          Generic Question Paper:
+        </ion-label>
+        <ion-col size="12">
+          <ion-select interface="action-sheet" placeholder="Select Question Paper"
+            (ionChange)="getGenricQuesPaper($event)">
+            <ion-select-option *ngFor="let genExam of gnericPaperList" [value]="genExam">
+              {{genExam.qpUniqueName}}
+            </ion-select-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <div class="ion-text-center ion-margin-top">
+      <ion-button (click)="submitGeneric()" [disabled]="crExamType == null">
+        <ion-text *ngIf="!isSub">{{crExamType == 'generic' ? 'Assign CompiQuest Paper' : 'Generate Paper'}}</ion-text>
+        <ion-spinner *ngIf="isSub"></ion-spinner>
+      </ion-button>
+      <ion-button (click)="cancelExam()">Cancel</ion-button>
+    </div>
+  </div>
+</ion-content>

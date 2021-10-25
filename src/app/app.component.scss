@@ -1,0 +1,62 @@
+.menu-bar {
+    --width: 70%;
+  }
+  .menu-item {
+    padding: 11px 25px;
+    font-size: 14px;
+    color: #7481A5;
+    font-weight: 500;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+  
+  ion-toolbar {
+    --background: #fff;
+      --padding-bottom: 26px;
+      border-bottom: 1px solid #EAF2FD;
+      --border-style: none;
+  }
+  
+  .user-thum {
+    width: 85px;
+    height: 85px;
+    border-radius: 100%;
+    border: 1px solid #dedede;
+    background-color: #ccc;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .user-data {
+    margin-top: 12px;
+  }
+  
+  .user-data a {
+    color: #675DDD;
+    font-size: 13px;
+    border-bottom: 1px solid #675DDD;
+  }
+  
+  .user-data h6 {
+    color:green;
+    margin: 8px;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 14px;
+  }
+  .user-data h5 {
+    color:darkgreen;
+    margin: 8px;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 14px;
+  }
+  .user-data h6 {
+    color:#7481A5;
+    margin: 8px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 14px;
+  }
+
+  
