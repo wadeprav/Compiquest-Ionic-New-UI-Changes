@@ -9,6 +9,7 @@ ion-img {
     height: 120px;
     width: 120px;
 }
+
 .nxt-btn {
     float: right;
 }
@@ -67,9 +68,14 @@ ion-radio {
     margin-left: 15px;
 }
 .answer-text{
-    margin-left: 12px;
-    font-size: 14px;
-    display: inline-block;
+    // margin-left: 12px;
+    // font-size: 14px;
+    // display: inline-block;
+    // word-break: break-all;
+    display: block;
+    font-size: 16px;
+    color: black;
+    --ion-font-family: -apple-system, BlinkMacSystemFont, 'Montserrat','Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue' !important;
 }
 
 ion-card {

@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class FetchApiDataService {
-
+z
   private url = 'https://api.compiquest.com:8443/api/AnalysisReport/AnalysisReport/AnalysisSummaryReport?CandidateID=7';
 
 constructor(private http: HttpClient) { }

@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./create-exam.page.scss'],
 })
 export class CreateExamPage implements OnInit {
-
+  createExamAPILink;
   userData: any;
   token: any;
   allExamType = [];
@@ -77,8 +77,6 @@ export class CreateExamPage implements OnInit {
     }
   }
 
-
-
   getGenericExam(e) {
     this.genexamId = e.detail.value.examTypeId;
     console.log(this.genexamId);
@@ -124,12 +122,22 @@ export class CreateExamPage implements OnInit {
         this.selfExam.qpDefaultCriteriaFlag = false;
       }
       this.isSub = true;
-      this.api.postData(`/api/CreateExamForOnlineCandidate/CreateExamForOnlineCandidate`, this.selfExam, this.httpOptions).subscribe((res: any) => {
+
+
+      if (this.userData.instituteID == "0") //Enable Create Exam for Online Candidate.
+      {
+        this.createExamAPILink = `/api/CreateExamForOnlineCandidate/CreateExamForOnlineCandidate`;
+      }
+      else if (this.userData.instituteID > 0 || this.userData.instituteID != null) //Enable Create Exam for Institute Candidate.
+      {
+        this.createExamAPILink = `/api/CreateExamForInstituteCandidate/CreateExamForInstituteCandidate`;
+      }
+
+      this.api.postData(this.createExamAPILink, this.selfExam, this.httpOptions).subscribe((res: any) => {
         // this.presentAlert(res.value);
         this.isSub = false;
         console.log(res);
         if (res.value == 'SUCCESS') {
-
           this.presentToast('Exam created');
           this.navCtrl.navigateRoot('/home');
           location.reload();
@@ -147,6 +155,7 @@ export class CreateExamPage implements OnInit {
         this.presentAlert('Kindly Select question paper');
       } else {
         this.isSub = true;
+
         this.http.post(`https://api.compiquest.com:8443/api/CreateExamForOnlineCandidate/InsertGenericPaperCriteria?CandidateID=${this.userData.candidateID}&QuestionPaperCriteriaID=${this.qpCriId}`, {}).subscribe(res => this.presentAlert(res));
         this.isSub = false;
         this.navCtrl.navigateRoot('/home');

@@ -31,11 +31,16 @@
         <ion-item class="ion-no-padding" lines="none">
           <ion-menu-toggle auto-hide="true">
             <div *ngIf="userData">
-              <div class="menu-item" *ngIf="userData.instituteID == 0" routerLink="/create-exam"
+              <!-- <div class="menu-item" *ngIf="userData.instituteID == 0" routerLink="/create-exam"
                 routerDirection="forward">
                 <ion-icon style="vertical-align: middle" name="calculator"></ion-icon>
                 <span style="margin-left: 8px">Create Exam</span>
-              </div>
+              </div> -->
+              <div class="menu-item" routerLink="/create-exam"
+              routerDirection="forward">
+              <ion-icon style="vertical-align: middle" name="calculator"></ion-icon>
+              <span style="margin-left: 8px">Create Exam</span>
+            </div>
             </div>
           </ion-menu-toggle>
 

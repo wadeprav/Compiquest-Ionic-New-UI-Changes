@@ -21,7 +21,7 @@
     <ion-spinner style="margin-left: 50%;" *ngIf="isLoading"></ion-spinner>
     <ion-card class="ion-padding" *ngIf="quesData.length > 0 && !isLoading">
       <ion-label class="ques-text" [appMathjax]="quesData[0].questionText">
-        Q. {{quesData[0].questionText}}
+      Q. {{quesData[0].questionText}}
       </ion-label>
       <ion-img *ngIf="quesData[0].questionImage" [src]="quesData[0].questionImage" style="height: 80%; width: 80%;"></ion-img>
       <ion-radio-group *ngIf="quesData[0].correctAnswerCount == 1" [value]="selectedAnser"
@@ -49,7 +49,7 @@
             <ion-radio [value]="que"></ion-radio>
             <ion-text style="display: inline-block;font-size: 14px;">{{que.seqOfAnswerText}}:</ion-text>
 
-            <ion-label *ngIf="que.answerText" class="answer-text" [appMathjax]="que.answerText">
+            <ion-label *ngIf="que.answerText" class="answer-text" [appMathjax]="que.answerText" text-wrap>
               {{que.answerText}}
             </ion-label>
 
@@ -72,7 +72,7 @@
 
             </ion-checkbox>
             <ion-text style="display: inline-block;">{{que.seqOfAnswerText}}:</ion-text>
-            <ion-label *ngIf="que.answerText" class="answer-text" [appMathjax]="que.answerText">
+            <ion-label *ngIf="que.answerText" class="answer-text" [appMathjax]="que.answerText" text-wrap>
               {{que.answerText}}
             </ion-label>
 
