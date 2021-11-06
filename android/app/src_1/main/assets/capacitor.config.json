@@ -1,0 +1,6 @@
+{
+	"appId": "com.compiquest.app",
+	"appName": "CompiQuest",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
