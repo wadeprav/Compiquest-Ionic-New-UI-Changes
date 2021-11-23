@@ -27,23 +27,23 @@
       <!-- <ion-text>
         Paper
       </ion-text> -->
-      <ion-grid >
+      <ion-grid>
         <ion-row>
           <ion-col sizeSm="4" class="base">
-            <p style="font-weight: bolder;font-size: large; text-align: center;" >{{exam.qpUniqueName}}</p>
+            <p style="font-weight: bolder;font-size: small; text-align: center;color: yellow">{{exam.qpUniqueName}}</p>
           </ion-col>
-            <ion-col sizeSm="4">
-              <div class="ion-text-end exam-btns">
+          <ion-col sizeSm="4">
+            <div class="ion-text-end exam-btns">
 
-                <ion-button *ngIf="exam.examCompletionStatus == 'I' && exam.isExamAppeared == true"
-                  (click)="gotoExamDetail(exam.examEnrollmentDetailsId, exam.candidateId, exam.subjectId, exam.isExamAppeared, exam.qpResultID)">
-                  RESUME</ion-button>
-                <ion-button *ngIf="exam.examCompletionStatus == null && exam.isExamAppeared == false"
-                  (click)="gotoExamDetail(exam.examEnrollmentDetailsId, exam.candidateId, exam.subjectId, exam.isExamAppeared, exam.qpResultID)">
-                  START</ion-button>
-              </div>
-            </ion-col>
-          </ion-row>
+              <ion-button *ngIf="exam.examCompletionStatus == 'I' && exam.isExamAppeared == true"
+                (click)="gotoExamDetail(exam.examEnrollmentDetailsId, exam.candidateId, exam.subjectId, exam.isExamAppeared, exam.qpResultID)">
+                RESUME</ion-button>
+              <ion-button *ngIf="exam.examCompletionStatus == null && exam.isExamAppeared == false"
+                (click)="gotoExamDetail(exam.examEnrollmentDetailsId, exam.candidateId, exam.subjectId, exam.isExamAppeared, exam.qpResultID)">
+                START</ion-button>
+            </div>
+          </ion-col>
+        </ion-row>
       </ion-grid>
       <ion-grid class="base">
         <ion-row>
@@ -70,14 +70,13 @@
         <ion-row>
           <ion-col sizeSm="4">
             <ion-text>
-              Result Details
+              <p *ngIf="exam.examCompletionStatus == 'I' && exam.isExamAppeared == true">In Progress</p>
+              <p *ngIf="exam.examCompletionStatus == null && exam.isExamAppeared == false">In Progress</p>
+              <p *ngIf="exam.examCompletionStatus == 'C' && exam.isExamAppeared == true">Attempted</p>
             </ion-text>
           </ion-col>
           <ion-col sizeSm="6">
-            <p *ngIf="exam.examCompletionStatus == 'I' && exam.isExamAppeared == true">In Progress</p>
-            <p *ngIf="exam.examCompletionStatus == null && exam.isExamAppeared == false">In Progress</p>
-            <p *ngIf="exam.examCompletionStatus == 'C' && exam.isExamAppeared == true">Attempted</p>
-
+            <p>{{exam.timeTaken}}</p>
           </ion-col>
         </ion-row>
         <ion-row *ngIf="exam.examCompletionStatus == 'C' && exam.isExamAppeared == true">
