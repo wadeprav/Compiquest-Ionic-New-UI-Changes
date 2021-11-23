@@ -25,10 +25,17 @@
               Total Marks:
             </ion-label>
             <ion-text *ngIf="totalMarks">
-              {{totalMarks}}
+              <b>{{totalMarks}}</b>
             </ion-text>
           </ion-col>
-
+          <ion-col size="6">
+            <ion-label color="light">
+              Time Taken:
+            </ion-label>
+            <ion-text *ngIf="totalMarks">
+              <b>{{candidateRes.timeTaken}}</b>
+            </ion-text>
+          </ion-col>
           <!-- <ion-col size="6">
             <ion-label color="light">
               Marks Obtained:
